@@ -1,6 +1,8 @@
 from math import sqrt
 
 # Return a euclidean distance-based similarity score for person1 and person2
+# You can read about other metrics for comparing items at
+# http://en.wikipedia.org/wiki/Metric_%28mathematics%29#Examples.
 def euclidean_distance_similarity_score(prefs, person1, person2):
 	# return zero if the two people do not share any recommendation
 	if set(prefs[person1].keys()).isdisjoint(prefs[person2].keys()):
@@ -14,6 +16,8 @@ def euclidean_distance_similarity_score(prefs, person1, person2):
 	return 1 / (1 + sum_of_squares)
 
 # Return a person correlation-based similarity score for person1 and person2
+# You can read about other metrics for comparing items at
+# http://en.wikipedia.org/wiki/Metric_%28mathematics%29#Examples.
 def person_correlation_similarity_score(prefs, person1, person2):
 	# get the list of mutually rated items
 	mutually_rated_items = list(set(prefs[person1].keys())
@@ -85,6 +89,77 @@ def getRecommendations(prefs, person, similarity=person_correlation_similarity_s
 		for item, total in totals.items()]
 
 	# Return the sorted list
+	rankings.sort( )
+	rankings.reverse( )
+	return rankings
+
+# Create a dictionary of items showing which other items they
+# are most similar to.
+def calculateSimilarItems(prefs, n=10):
+	result={}
+	
+	# Invert the preference matrix to be item-centric
+	itemPrefs = getItemCentricPrefs(prefs)
+
+	for item in itemPrefs:
+		# Find the most similar items to this one
+		scores = topMatches(itemPrefs, item, n=n,
+			similarity=euclidean_distance_similarity_score)
+
+		result[item] = scores
+
+	return result
+
+# Invert the preference matrix to be item-centric
+def getItemCentricPrefs(prefs):
+	result = {}
+	for person in prefs:
+		for item in prefs[person]:
+			result.setdefault(item, {})
+
+			# Flip item and person
+			result[item][person] = prefs[person][item]
+	return result
+
+# Get recommended items by a user. This method uses a similarity dataset
+# built earlier (itemMatch, created by calculateSimilarItems method).
+# Thus, it do not have to calculate the similarities scores for all the
+# other critics
+# Item-based filtering is significantly faster than user-based when getting
+# a list of recommendations for a large dataset, but it does have the
+# additional overhead of maintaining the item similarity table
+
+# Item-based filtering usually outperforms user-based filtering in sparse 
+# datasets, and the two perform about equally in dense datasets.
+# To learn more about the difference in performance between these
+# algorithms, check out a paper called “Item-based Collaborative Filter-
+# ing Recommendation Algorithms” by Sarwar et al. at http://citeseer.ist.
+# psu.edu/sarwar01itembased.html.
+def getRecommendedItems(prefs, itemMatch, user):
+	userRatings = prefs[user]
+	scores = {}
+	totalSim = {}
+
+	# Loop over items rated by this user
+	for (ratedItem, rating) in userRatings.items():
+		# Loop over items similar to this one
+		for (similarity, similarItem) in itemMatch[ratedItem]:
+			# Ignore if this user has already rated this item
+			if similarItem in userRatings: continue
+
+			# Weighted sum of rating times similarity
+			scores.setdefault(similarItem, 0)
+			scores[similarItem] += similarity * rating
+
+			# Sum of all the similarities
+			totalSim.setdefault(similarItem, 0)
+			totalSim[similarItem] += similarity
+
+		# Divide each total score by total weighting to get an average
+		rankings=[(score / totalSim[ratedItem], ratedItem) 
+			for ratedItem, score in scores.items()]
+
+	# Return the rankings from highest to lowest
 	rankings.sort( )
 	rankings.reverse( )
 	return rankings
