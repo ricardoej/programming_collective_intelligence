@@ -15,10 +15,10 @@ def euclidean_distance_similarity_score(prefs, person1, person2):
 	# gives higher values for people who are similar
 	return 1 / (1 + sum_of_squares)
 
-# Return a person correlation-based similarity score for person1 and person2
+# Return a pearson correlation-based similarity score for person1 and person2
 # You can read about other metrics for comparing items at
 # http://en.wikipedia.org/wiki/Metric_%28mathematics%29#Examples.
-def person_correlation_similarity_score(prefs, person1, person2):
+def pearson_correlation_similarity_score(prefs, person1, person2):
 	# get the list of mutually rated items
 	mutually_rated_items = list(set(prefs[person1].keys())
 		.intersection(prefs[person2].keys()))
@@ -34,8 +34,10 @@ def person_correlation_similarity_score(prefs, person1, person2):
 	sum2 = sum([prefs[person2][item] for item in mutually_rated_items])
 
 	# sum up the squares
-	sum1Sq = sum([pow(prefs[person1][item], 2) for item in mutually_rated_items])
-	sum2Sq = sum([pow(prefs[person2][item], 2) for item in mutually_rated_items])
+	sum1Sq = sum([pow(prefs[person1][item], 2) 
+		for item in mutually_rated_items])
+	sum2Sq = sum([pow(prefs[person2][item], 2) 
+		for item in mutually_rated_items])
 
 	# sum up the products
 	pSum = sum([prefs[person1][item] * prefs[person2][item] for item in mutually_rated_items])
@@ -49,7 +51,7 @@ def person_correlation_similarity_score(prefs, person1, person2):
 
 # Returns the best matches for person from the prefs dictionary.
 # Number of results and similarity function are optional params.
-def topMatches(prefs, person, n=5, similarity=person_correlation_similarity_score):
+def topMatches(prefs, person, n=5, similarity=pearson_correlation_similarity_score):
 	scores = [(similarity(prefs, person, other), other)
 		for other in prefs if other != person]
 
@@ -62,7 +64,7 @@ def topMatches(prefs, person, n=5, similarity=person_correlation_similarity_scor
 
 # Gets recommendations for a person by using a weighted average
 # of every other user's rankings
-def getRecommendations(prefs, person, similarity=person_correlation_similarity_score):
+def getRecommendations(prefs, person, similarity=pearson_correlation_similarity_score):
 	totals={}
 	simSums={}
 	
