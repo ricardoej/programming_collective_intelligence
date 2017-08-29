@@ -1,66 +1,66 @@
 # A dictionary of movie critics and their ratings of a small
 # set of movies
 ratings = {
-	'Lisa Rose':
+	'Juliana':
 	{
-		'Lady in the Water': 2.5,
-		'Snakes on a Plane': 3.5,
-		'Just My Luck': 3.0,
-		'Superman Returns': 3.5,
-		'You, Me and Dupree': 2.5,
-		'The Night Listener': 3.0
+		'Invocação do Mal 2': 2.5,
+		'Zootopia': 3.5,
+		'Animais Fantásticos e Onde Habitam': 3.0,
+		'Rogue One: Uma História Star Wars': 3.5,
+		'A Grande Muralha': 2.5,
+		'A Lenda de Tarzan': 3.0
 	},
 
-	'Gene Seymour':
+	'Pedro':
 	{
-		'Lady in the Water': 3.0,
-		'Snakes on a Plane': 3.5,
-		'Just My Luck': 1.5,
-		'Superman Returns': 5.0,
-		'The Night Listener': 3.0,
-		'You, Me and Dupree': 3.5
+		'Invocação do Mal 2': 3.0,
+		'Zootopia': 3.5,
+		'Animais Fantásticos e Onde Habitam': 1.5,
+		'Rogue One: Uma História Star Wars': 5.0,
+		'A Lenda de Tarzan': 3.0,
+		'A Grande Muralha': 3.5
 	},
 
-	'Michael Phillips':
+	'Marcelo':
 	{
-		'Lady in the Water': 2.5,
-		'Snakes on a Plane': 3.0,
-		'Superman Returns': 3.5,
-		'The Night Listener': 4.0
+		'Invocação do Mal 2': 2.5,
+		'Zootopia': 3.0,
+		'Rogue One: Uma História Star Wars': 3.5,
+		'A Lenda de Tarzan': 4.0
 	},
 
-	'Claudia Puig':
+	'Fabricio':
 	{
-		'Snakes on a Plane': 3.5,
-		'Just My Luck': 3.0,
-		'The Night Listener': 4.5,
-		'Superman Returns': 4.0,
-		'You, Me and Dupree': 2.5
+		'Zootopia': 3.5,
+		'Animais Fantásticos e Onde Habitam': 3.0,
+		'A Lenda de Tarzan': 4.5,
+		'Rogue One: Uma História Star Wars': 4.0,
+		'A Grande Muralha': 2.5
 	},
 
-	'Mick LaSalle':
+	'Henrique':
 	{
-		'Lady in the Water': 3.0,
-		'Snakes on a Plane': 4.0,
-		'Just My Luck': 2.0,
-		'Superman Returns': 3.0,
-		'The Night Listener': 3.0,
-		'You, Me and Dupree': 2.0
+		'Invocação do Mal 2': 3.0,
+		'Zootopia': 4.0,
+		'Animais Fantásticos e Onde Habitam': 2.0,
+		'Rogue One: Uma História Star Wars': 3.0,
+		'A Lenda de Tarzan': 3.0,
+		'A Grande Muralha': 2.0
 	},
 
-	'Jack Matthews':
+	'Claudio':
 	{
-		'Lady in the Water': 3.0,
-		'Snakes on a Plane': 4.0,
-		'The Night Listener': 3.0,
-		'Superman Returns': 5.0,
-		'You, Me and Dupree': 3.5
+		'Invocação do Mal 2': 3.0,
+		'Zootopia': 4.0,
+		'A Lenda de Tarzan': 3.0,
+		'Rogue One: Uma História Star Wars': 5.0,
+		'A Grande Muralha': 3.5
 	},
 	
-	'Toby':
+	'Joaquim':
 	{
-		'Snakes on a Plane':4.5,
-		'You, Me and Dupree':1.0,
-		'Superman Returns':4.0
+		'Zootopia':4.5,
+		'A Grande Muralha':1.0,
+		'Rogue One: Uma História Star Wars':4.0
 	}
 }
